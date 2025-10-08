@@ -121,7 +121,9 @@ graph LR;
                 tier4_faiss_low.append(meta)
                 seen.add(idx)  # ← 改：只加 idx
 ```
-  ### (5)
+  ### (5)rag_system
+會import complementary的 search 類別，採用BAAI/bge-base-zh-v1.5 這個embed model來對對話內的內容做embed，
+並照search規則取出前二十則相關的留言內容供語言模型taide/TAIDE-LX-7B-Chat閱讀。最後讓語言模型自行回答。
   
   
   
