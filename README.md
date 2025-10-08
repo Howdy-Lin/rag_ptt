@@ -51,7 +51,7 @@ graph LR;
   將faiss內的資料，透過retriever將faiss內metabase的資料，透過jieba斷詞，並計算好每則(標題+留言)的BM25分數，將其儲存在新的bm25.pkl內。
   第二部分就是建立bm25與faiss向量相似度的檢索規則，從相似度最高的開始排序，規則如search類別的內容
   ```
-        # ========== 關鍵改動：分層收集 ==========
+        # ========== 分層收集 ==========
         tier1_bm25_high = []  # BM25 高分（最優先）
         tier2_faiss_high = []  # FAISS 高分
         tier3_bm25_med = []  # BM25 中分
@@ -124,6 +124,14 @@ graph LR;
   ### (5)rag_system
 會import complementary的 search 類別，採用BAAI/bge-base-zh-v1.5 這個embed model來對對話內的內容做embed，
 並照search規則取出前二十則相關的留言內容供語言模型taide/TAIDE-LX-7B-Chat閱讀。最後讓語言模型自行回答。
-  
-  
+
+## 結果比較
+兩個都是使用相同的語言模型
+圖一是對照組，在未使用rag之前的輸出結果，圖二則是有經過檢索的回答，雖然實驗組回答的也不完全正確，但已經能初步指出Wang Soto和Juan Soto的基本關聯
+### 對照組
+<img width="1910" height="202" alt="image" src="https://github.com/user-attachments/assets/d21f0302-0eee-47ad-a448-a12ac5353251" />
+
+### 實驗組
+<img width="1908" height="584" alt="image" src="https://github.com/user-attachments/assets/10d3af19-ed34-4c02-8a16-122150c7de4c" />
+
   
